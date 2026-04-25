@@ -58,6 +58,7 @@ body{
   position:sticky;
   top:0;
   z-index:100;
+  overflow:visible;
 }
 .logo{display:flex;align-items:center;gap:10px}
 .logo-mark{
@@ -279,25 +280,28 @@ body{
 
 /* LANG MODAL */
 .lang-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,0.4);
-  display:flex;align-items:center;justify-content:center;
-  z-index:200;padding:1rem;
-}
-.lang-modal{
-  background:var(--color-surface);border-radius:var(--radius-lg);
-  padding:1.5rem;max-width:320px;width:100%;
+  display:none;
+  position:absolute;top:60px;right:1.25rem;
+  background:var(--color-surface);
   border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);
+  padding:1.25rem;width:260px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.12);
+  z-index:200;
 }
-.lang-modal h2{font-size:16px;font-weight:600;margin-bottom:1rem}
+.lang-overlay.open{display:block}
+.lang-modal h2{font-size:14px;font-weight:600;margin-bottom:0.75rem;color:var(--color-text)}
 .lang-option{
   display:flex;align-items:center;justify-content:space-between;
-  padding:9px 0;border-bottom:1px solid var(--color-border);
-  cursor:pointer;font-size:14px;
+  padding:8px 0;border-bottom:1px solid var(--color-border);
+  cursor:pointer;font-size:13px;color:var(--color-text);
+  background:none;border-left:none;border-right:none;border-top:none;
+  width:100%;font-family:inherit;text-align:left;
 }
 .lang-option:last-child{border-bottom:none}
 .lang-option:hover{color:var(--color-cdec-mid)}
 .lang-close{
-  margin-top:1rem;width:100%;padding:9px;
+  margin-top:0.75rem;width:100%;padding:8px;
   background:var(--color-cdec);color:#fff;
   border:none;border-radius:var(--radius-md);
   font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;
@@ -317,17 +321,15 @@ body{
 <h1 class="sr-only">CDEC Pro — Provider Workspace Prototype. Use the role tabs to switch between Individual, Center Director, and Specialist views.</h1>
 
 <!-- LANGUAGE MODAL -->
-<div class="lang-overlay hidden" id="lang-overlay" role="dialog" aria-modal="true" aria-labelledby="lang-title">
-  <div class="lang-modal">
-    <h2 id="lang-title">Select language / Seleccionar idioma</h2>
-    <div class="lang-option" tabindex="0" onclick="setLang('English')">English <span>✓</span></div>
-    <div class="lang-option" tabindex="0" onclick="setLang('Español')">Español</div>
-    <div class="lang-option" tabindex="0" onclick="setLang('中文')">中文 (Chinese)</div>
-    <div class="lang-option" tabindex="0" onclick="setLang('Soomaali')">Soomaali (Somali)</div>
-    <div class="lang-option" tabindex="0" onclick="setLang('العربية')">العربية (Arabic)</div>
-    <div class="lang-option" tabindex="0" onclick="setLang('Other')">Other / Otro →</div>
-    <button class="lang-close" onclick="closeLang()">Close</button>
-  </div>
+<div class="lang-overlay" id="lang-overlay" role="dialog" aria-modal="true" aria-labelledby="lang-title">
+  <h2 id="lang-title">Select language / Seleccionar idioma</h2>
+  <button class="lang-option" onclick="setLang('English')">English <span>✓</span></button>
+  <button class="lang-option" onclick="setLang('Español')">Español</button>
+  <button class="lang-option" onclick="setLang('中文')">中文 (Chinese)</button>
+  <button class="lang-option" onclick="setLang('Soomaali')">Soomaali (Somali)</button>
+  <button class="lang-option" onclick="setLang('العربية')">العربية (Arabic)</button>
+  <button class="lang-option" onclick="setLang('Other')">Other / Otro →</button>
+  <button class="lang-close" onclick="closeLang()">Close</button>
 </div>
 
 <!-- TOPBAR -->
@@ -753,20 +755,23 @@ function extLink(dest){
 }
 
 function openLang(){
-  document.getElementById('lang-overlay').classList.remove('hidden');
+  const el=document.getElementById('lang-overlay');
+  el.classList.toggle('open');
 }
 function closeLang(){
-  document.getElementById('lang-overlay').classList.add('hidden');
+  document.getElementById('lang-overlay').classList.remove('open');
 }
 function setLang(lang){
   document.getElementById('lang-label').textContent=lang;
   closeLang();
 }
-document.getElementById('lang-overlay').addEventListener('click',function(e){
-  if(e.target===this) closeLang();
-});
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape') closeLang();
+});
+document.addEventListener('click',function(e){
+  const overlay=document.getElementById('lang-overlay');
+  const btn=document.querySelector('.lang-btn');
+  if(!overlay.contains(e.target)&&!btn.contains(e.target)) closeLang();
 });
 </script>
 
