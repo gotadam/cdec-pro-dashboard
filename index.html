@@ -8,772 +8,802 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --color-bg:#F5F5F0;
-  --color-surface:#FFFFFF;
-  --color-surface-2:#F1EFE8;
-  --color-border:#E0DED8;
-  --color-border-med:#C8C6C0;
-  --color-text:#1A1A18;
-  --color-text-2:#4A4A46;
-  --color-text-3:#757570;
-  --color-cdec:#1B4F72;
-  --color-cdec-light:#E6F1FB;
-  --color-cdec-mid:#185FA5;
-  --radius-md:8px;
-  --radius-lg:12px;
+  --bg:#F4F3EF;--surface:#FFFFFF;--surface2:#EDECE8;--border:#D8D6D0;--border2:#B8B6B0;
+  --text:#1C1C1A;--text2:#48473F;--text3:#6E6D65;
+  --cdec:#1A4B6E;--cdec-dark:#123350;--cdec-light:#E8F1F8;--cdec-mid:#1E5F8E;
+  --ok-bg:#EAF3DE;--ok-text:#285A0A;--ok-border:#A8CC7A;
+  --warn-bg:#FEF3E2;--warn-text:#7A4500;--warn-border:#F5B942;
+  --danger-bg:#FDECEC;--danger-text:#8C1F1F;--danger-border:#E89090;
+  --info-bg:#E8F1F8;--info-text:#1A4B6E;--info-border:#90B8D8;
+  --radius:8px;--radius-lg:12px;
+  --shadow:0 1px 4px rgba(0,0,0,0.08),0 0 0 1px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.1),0 0 0 1px rgba(0,0,0,0.04);
 }
-@media(prefers-color-scheme:dark){
-  :root{
-    --color-bg:#1A1A18;
-    --color-surface:#242422;
-    --color-surface-2:#2C2C2A;
-    --color-border:#3A3A36;
-    --color-border-med:#4A4A46;
-    --color-text:#F1EFE8;
-    --color-text-2:#B4B2A9;
-    --color-text-3:#757570;
-    --color-cdec-light:#0C2D42;
-  }
-}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
-  background:var(--color-bg);
-  color:var(--color-text);
-  font-size:16px;
-  line-height:1.5;
-  min-height:100vh;
-}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.5;min-height:100vh}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* TOPBAR */
-.topbar{
-  background:var(--color-surface);
-  border-bottom:1px solid var(--color-border);
-  padding:0.75rem 1.25rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:10px;
-  position:sticky;
-  top:0;
-  z-index:100;
-  overflow:visible;
-}
+.topbar{background:var(--cdec);padding:.75rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:10px}
-.logo-mark{
-  width:32px;height:32px;border-radius:7px;
-  background:var(--color-cdec);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-}
-.logo-mark span{color:#fff;font-size:12px;font-weight:600;letter-spacing:0.5px}
-.logo-name{font-size:15px;font-weight:600;color:var(--color-text)}
-.logo-sub{font-size:11px;color:var(--color-text-3);margin-top:1px}
-.topbar-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.lang-btn{
-  font-size:12px;color:var(--color-text-2);
-  border:1px solid var(--color-border);border-radius:var(--radius-md);
-  padding:5px 11px;cursor:pointer;background:transparent;
-  display:flex;align-items:center;gap:6px;font-family:inherit;
-}
-.lang-btn:hover{background:var(--color-surface-2)}
-.lang-btn:focus-visible{outline:3px solid var(--color-cdec);outline-offset:2px}
-.user-widget{display:flex;align-items:center;gap:9px}
-.avatar{
-  width:34px;height:34px;border-radius:50%;
-  background:var(--color-cdec);
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:600;color:#fff;flex-shrink:0;
-}
-.user-name{font-size:13px;font-weight:600;color:var(--color-text)}
-.user-role{font-size:11px;color:var(--color-text-3)}
+.logo-mark{width:34px;height:34px;border-radius:7px;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-name{font-size:15px;font-weight:700;color:#fff}
+.logo-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:1px}
+.topbar-right{display:flex;align-items:center;gap:10px;position:relative}
+.lang-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:var(--radius);padding:5px 11px;font-size:12px;font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:6px}
+.lang-btn:hover{background:rgba(255,255,255,.25)}
+.lang-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.lang-dropdown{display:none;position:absolute;top:calc(100% + 8px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);min-width:190px;z-index:200;overflow:hidden}
+.lang-dropdown.open{display:block}
+.lang-opt{display:block;width:100%;text-align:left;padding:10px 14px;font-size:13px;font-family:inherit;background:none;border:none;border-bottom:1px solid var(--border);color:var(--text);cursor:pointer}
+.lang-opt:last-child{border-bottom:none}
+.lang-opt:hover{background:var(--surface2)}
+.lang-opt:focus-visible{outline:3px solid var(--cdec);outline-offset:-2px}
+.user-chip{display:flex;align-items:center;gap:8px}
+.avatar{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.user-info{display:none}
+@media(min-width:480px){.user-info{display:block}}
+.user-name{font-size:13px;font-weight:600;color:#fff}
+.user-role-text{font-size:11px;color:rgba(255,255,255,.7)}
 
-/* ROLE BAR */
-.rolebar{
-  background:var(--color-surface);
-  border-bottom:1px solid var(--color-border);
-  padding:0 1.25rem;
-}
-.role-tabs{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-.role-tabs::-webkit-scrollbar{display:none}
-.role-tab{
-  padding:11px 18px;font-size:13px;font-weight:500;
-  color:var(--color-text-3);border:none;
-  border-bottom:2px solid transparent;
-  cursor:pointer;white-space:nowrap;
-  background:transparent;font-family:inherit;
-  transition:color 0.15s,border-color 0.15s;
-}
-.role-tab:hover{color:var(--color-text);background:var(--color-surface-2)}
-.role-tab.active{color:var(--color-cdec);border-bottom-color:var(--color-cdec)}
-.role-tab:focus-visible{outline:3px solid var(--color-cdec);outline-offset:-2px}
-.role-note{
-  font-size:12px;color:var(--color-text-3);
-  padding:8px 1.25rem;
-  background:var(--color-surface-2);
-  border-bottom:1px solid var(--color-border);
-  font-style:italic;
-}
+/* ROLE SELECTOR */
+.role-selector{padding:.875rem 1.25rem;background:var(--surface);border-bottom:1px solid var(--border)}
+.role-selector-label{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:.6rem}
+.role-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(min-width:560px){.role-cards{grid-template-columns:repeat(4,1fr)}}
+.role-card{background:var(--surface);border:2px solid var(--border);border-radius:var(--radius-lg);padding:.6rem .875rem;cursor:pointer;text-align:left;font-family:inherit;transition:border-color .15s,background .15s;display:flex;align-items:center;gap:8px}
+.role-card:hover{border-color:var(--cdec-mid);background:var(--cdec-light)}
+.role-card:focus-visible{outline:3px solid var(--cdec);outline-offset:2px}
+.role-card.active{border-color:var(--cdec);background:var(--cdec-light)}
+.role-icon{width:28px;height:28px;border-radius:6px;background:var(--surface2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.role-card.active .role-icon{background:var(--cdec)}
+.role-card-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.2}
+.role-card-desc{font-size:11px;color:var(--text3);margin-top:2px;line-height:1.3}
+.role-note{font-size:12px;color:var(--text3);padding:.5rem 1.25rem;background:var(--surface2);border-bottom:1px solid var(--border);font-style:italic}
 
-/* MAIN LAYOUT */
-.main{max-width:860px;margin:0 auto;padding:1.25rem 1.25rem 3rem}
+/* INNER TABS */
+.inner-tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.25rem}
+.inner-tabs{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.inner-tabs::-webkit-scrollbar{display:none}
+.inner-tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--text3);border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;background:transparent;font-family:inherit;transition:color .15s,border-color .15s}
+.inner-tab:hover{color:var(--text);background:var(--surface2)}
+.inner-tab.active{color:var(--cdec);border-bottom-color:var(--cdec)}
+.inner-tab:focus-visible{outline:3px solid var(--cdec);outline-offset:-2px}
 
-/* TYPOGRAPHY */
-.welcome-name{font-size:20px;font-weight:600;color:var(--color-text);margin-bottom:2px}
-.welcome-sub{font-size:13px;color:var(--color-text-3)}
-.section-label{
-  font-size:11px;font-weight:600;color:var(--color-text-3);
-  letter-spacing:0.07em;text-transform:uppercase;
-  margin-bottom:9px;margin-top:1.25rem;
-}
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:1.25rem 1rem 3rem}
+
+/* TYPE */
+.welcome{font-size:19px;font-weight:700;color:var(--text);letter-spacing:-.02em}
+.welcome-sub{font-size:13px;color:var(--text3);margin-top:3px}
+.section-label{font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;margin-top:1.25rem}
 
 /* CARDS */
-.card{
-  background:var(--color-surface);
-  border:1px solid var(--color-border);
-  border-radius:var(--radius-lg);
-  padding:1rem 1.25rem;
-  margin-bottom:0;
-}
-.card-title{
-  font-size:14px;font-weight:600;color:var(--color-text);
-  margin-bottom:2px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;
-}
-.card-sub{font-size:12px;color:var(--color-text-3);margin-bottom:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.125rem;box-shadow:var(--shadow)}
+.card-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.card-sub{font-size:12px;color:var(--text3);margin-bottom:10px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
 
-/* GRID */
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+/* METRIC */
+.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:.875rem 1rem;box-shadow:var(--shadow)}
+.metric-num{font-size:26px;font-weight:700;color:var(--text);line-height:1;letter-spacing:-.02em}
+.metric-denom{font-size:14px;color:var(--text3);font-weight:500}
+.metric-label{font-size:12px;color:var(--text3);margin-top:4px}
+.progress-bar{height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;margin-top:8px}
+.progress-fill{height:100%;border-radius:3px;background:var(--cdec)}
 
-/* METRIC CARDS */
-.metric-card{
-  background:var(--color-surface);
-  border:1px solid var(--color-border);
-  border-radius:var(--radius-lg);
-  padding:1rem 1.25rem;
-}
-.metric-num{font-size:28px;font-weight:600;color:var(--color-text);line-height:1}
-.metric-denom{font-size:15px;color:var(--color-text-3);font-weight:400}
-.metric-label{font-size:12px;color:var(--color-text-3);margin-top:5px}
-.progress-bar{height:5px;background:var(--color-surface-2);border-radius:3px;overflow:hidden;margin-top:9px}
-.progress-fill{height:100%;border-radius:3px;background:var(--color-cdec)}
-
-/* ALERT BAR */
-.alert-bar{
-  background:#FAEEDA;border:1px solid #FAC775;
-  border-radius:var(--radius-md);
-  padding:11px 14px;display:flex;align-items:flex-start;gap:10px;
-  font-size:13px;color:#633806;margin-bottom:1rem;
-}
-.alert-dot{
-  width:18px;height:18px;border-radius:50%;background:#854F0B;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;margin-top:1px;
-}
-.alert-dot span{color:#fff;font-size:9px;font-weight:700}
+/* ALERTS */
+.alert-bar{border-radius:var(--radius);padding:10px 13px;display:flex;align-items:flex-start;gap:10px;font-size:13px;margin-bottom:.875rem}
+.alert-warn{background:var(--warn-bg);border:1px solid var(--warn-border);color:var(--warn-text)}
+.alert-info{background:var(--info-bg);border:1px solid var(--info-border);color:var(--info-text)}
+.alert-dot{width:18px;height:18px;min-width:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;margin-top:1px;flex-shrink:0}
+.alert-warn .alert-dot{background:var(--warn-text);color:#fff}
+.alert-info .alert-dot{background:var(--cdec);color:#fff}
 
 /* BADGES */
-.badge{
-  display:inline-flex;align-items:center;
-  font-size:11px;font-weight:600;
-  padding:3px 9px;border-radius:20px;white-space:nowrap;
-}
-.badge-warn{background:#FAEEDA;color:#854F0B}
-.badge-danger{background:#FCEBEB;color:#A32D2D}
-.badge-ok{background:#EAF3DE;color:#3B6D11}
-.badge-info{background:#E6F1FB;color:#185FA5}
-.badge-gray{background:var(--color-surface-2);color:var(--color-text-3)}
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.badge-ok{background:var(--ok-bg);color:var(--ok-text);border:1px solid var(--ok-border)}
+.badge-warn{background:var(--warn-bg);color:var(--warn-text);border:1px solid var(--warn-border)}
+.badge-danger{background:var(--danger-bg);color:var(--danger-text);border:1px solid var(--danger-border)}
+.badge-info{background:var(--info-bg);color:var(--info-text);border:1px solid var(--info-border)}
+.badge-gray{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
 
-/* ITEM ROWS */
-.item-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:9px 0;border-bottom:1px solid var(--color-border);gap:10px;
-}
+/* ROWS */
+.item-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);gap:10px}
 .item-row:last-child{border-bottom:none}
-.item-label{font-size:13px;color:var(--color-text)}
-.item-sub{font-size:11px;color:var(--color-text-3);margin-top:2px}
-.item-action{
-  font-size:12px;color:var(--color-cdec-mid);
-  text-decoration:none;cursor:pointer;
-  background:transparent;border:none;font-family:inherit;
-  white-space:nowrap;padding:0;
-}
+.item-label{font-size:13px;color:var(--text);font-weight:500}
+.item-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.item-action{font-size:12px;color:var(--cdec-mid);cursor:pointer;background:transparent;border:none;font-family:inherit;padding:0;font-weight:600;white-space:nowrap}
 .item-action:hover{text-decoration:underline}
-.item-action:focus-visible{outline:3px solid var(--color-cdec);border-radius:3px}
+.item-action:focus-visible{outline:3px solid var(--cdec);border-radius:3px;outline-offset:2px}
 
-/* ENROLLMENT QUEUE */
-.enroll-item{
-  padding:12px 0;border-bottom:1px solid var(--color-border);
-  display:flex;flex-direction:column;gap:6px;
-}
-.enroll-item:last-child{border-bottom:none}
+/* ENROLL */
+.enroll-item{padding:11px 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:5px}
+.enroll-item:last-child{border-bottom:none;padding-bottom:0}
 .enroll-row1{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
-.enroll-child{font-size:14px;font-weight:600;color:var(--color-text)}
-.enroll-detail{font-size:12px;color:var(--color-text-3)}
-.enroll-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:4px}
-.btn-sm{
-  font-size:12px;font-weight:500;
-  padding:5px 13px;border-radius:var(--radius-md);
-  cursor:pointer;font-family:inherit;
-  border:1px solid var(--color-border);
-  background:var(--color-surface);color:var(--color-text);
-  transition:background 0.12s;
-}
-.btn-sm:hover{background:var(--color-surface-2)}
-.btn-sm:focus-visible{outline:3px solid var(--color-cdec);outline-offset:2px}
-.btn-sm.accept{background:#EAF3DE;color:#27500A;border-color:#C0DD97}
-.btn-sm.accept:hover{background:#C0DD97}
-.btn-sm.decline{background:#FCEBEB;color:#791F1F;border-color:#F7C1C1}
-.btn-sm.decline:hover{background:#F7C1C1}
-.btn-sm.waitlist{background:#FAEEDA;color:#633806;border-color:#FAC775}
-.btn-sm.waitlist:hover{background:#FAC775}
+.enroll-child{font-size:14px;font-weight:700;color:var(--text)}
+.enroll-detail{font-size:12px;color:var(--text3)}
+.enroll-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:3px}
+.btn-sm{font-size:12px;font-weight:600;padding:5px 12px;border-radius:var(--radius);cursor:pointer;font-family:inherit;border:1px solid var(--border);background:var(--surface);color:var(--text);transition:background .12s}
+.btn-sm:hover{background:var(--surface2)}
+.btn-sm:focus-visible{outline:3px solid var(--cdec);outline-offset:2px}
+.btn-sm.accept{background:var(--ok-bg);color:var(--ok-text);border-color:var(--ok-border)}
+.btn-sm.accept:hover{background:#C8E8A0}
+.btn-sm.decline{background:var(--danger-bg);color:var(--danger-text);border-color:var(--danger-border)}
+.btn-sm.decline:hover{background:#F5C0C0}
+.btn-sm.waitlist{background:var(--warn-bg);color:var(--warn-text);border-color:var(--warn-border)}
+.btn-sm.waitlist:hover{background:#FAD88A}
 
-/* STAFF ROWS */
-.staff-row{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 0;border-bottom:1px solid var(--color-border);
-}
+/* STAFF */
+.staff-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
 .staff-row:last-child{border-bottom:none}
-.staff-avatar{
-  width:30px;height:30px;border-radius:50%;
-  background:var(--color-cdec-light);
-  display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:600;color:var(--color-cdec-mid);flex-shrink:0;
-}
+.staff-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
 .staff-info{flex:1;min-width:0}
-.staff-name{font-size:13px;color:var(--color-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.staff-issue{font-size:11px;color:var(--color-text-3);margin-top:2px}
+.staff-name{font-size:13px;color:var(--text);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.staff-issue{font-size:11px;color:var(--text3);margin-top:2px}
 
-/* LINK-OUT CARDS */
-.link-out{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:10px 13px;border:1px solid var(--color-border);
-  border-radius:var(--radius-md);margin-bottom:7px;
-  cursor:pointer;background:var(--color-surface);
-  text-decoration:none;transition:background 0.12s;
-}
-.link-out:hover{background:var(--color-surface-2)}
-.link-out:focus-visible{outline:3px solid var(--color-cdec);outline-offset:2px}
-.link-out-label{font-size:13px;color:var(--color-cdec-mid);font-weight:600}
-.link-out-sub{font-size:11px;color:var(--color-text-3);margin-top:2px}
-.link-out-ext{font-size:11px;color:var(--color-text-3);white-space:nowrap;margin-left:8px}
+/* LINK OUTS */
+.link-out{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;cursor:pointer;background:var(--surface);text-align:left;width:100%;font-family:inherit;transition:background .12s,border-color .12s}
+.link-out:hover{background:var(--surface2);border-color:var(--cdec-mid)}
+.link-out:focus-visible{outline:3px solid var(--cdec);outline-offset:2px}
+.link-out-label{font-size:13px;color:var(--cdec-mid);font-weight:700}
+.link-out-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.link-out-ext{font-size:11px;color:var(--text3);flex-shrink:0;margin-left:8px}
 
-/* COMING SOON */
-.coming-card{
-  background:var(--color-surface-2);
-  border:1px dashed var(--color-border-med);
-  border-radius:var(--radius-lg);
-  padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:12px;
-  margin-bottom:8px;
-}
-.coming-icon{
-  width:32px;height:32px;border-radius:var(--radius-md);
-  background:var(--color-border);
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.coming-title{font-size:13px;font-weight:600;color:var(--color-text-3);margin-bottom:3px}
-.coming-body{font-size:12px;color:var(--color-text-3)}
+/* COMING */
+.coming-card{background:var(--surface2);border:1px dashed var(--border2);border-radius:var(--radius-lg);padding:.875rem 1rem;display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+.coming-icon{width:30px;height:30px;border-radius:var(--radius);background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.coming-title{font-size:13px;font-weight:700;color:var(--text3);margin-bottom:2px}
+.coming-body{font-size:12px;color:var(--text3)}
 
-/* HIDDEN */
-.hidden{display:none}
+/* QUALITY STANDARDS */
+.qs-area{border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:10px;background:var(--surface);box-shadow:var(--shadow)}
+.qs-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;gap:10px;background:var(--surface);border:none;width:100%;text-align:left;font-family:inherit}
+.qs-header:hover{background:var(--surface2)}
+.qs-header:focus-visible{outline:3px solid var(--cdec);outline-offset:-2px}
+.qs-left{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.qs-icon{width:32px;height:32px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.qs-name{font-size:13px;font-weight:700;color:var(--text)}
+.qs-req{font-size:11px;color:var(--text3);margin-top:2px}
+.qs-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.qs-chevron{font-size:11px;color:var(--text3);transition:transform .2s;display:inline-block}
+.qs-area.open .qs-chevron{transform:rotate(180deg)}
+.qs-body{display:none;border-top:1px solid var(--border);padding:14px}
+.qs-area.open .qs-body{display:block}
+.qs-self-label{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:8px}
+.qs-options{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.qs-opt{padding:5px 12px;border-radius:20px;border:2px solid var(--border);font-size:12px;font-weight:600;cursor:pointer;background:var(--surface);font-family:inherit;color:var(--text2)}
+.qs-opt:hover{border-color:var(--cdec-mid)}
+.qs-opt:focus-visible{outline:3px solid var(--cdec);outline-offset:2px}
+.qs-opt.sel-not{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-text)}
+.qs-opt.sel-progress{background:var(--warn-bg);border-color:var(--warn-border);color:var(--warn-text)}
+.qs-opt.sel-meeting{background:var(--ok-bg);border-color:var(--ok-border);color:var(--ok-text)}
+.qs-resource-label{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px}
+.qs-resource-link{display:flex;align-items:center;gap:9px;padding:9px 11px;border:1px solid var(--info-border);border-radius:var(--radius);margin-bottom:6px;background:var(--cdec-light);cursor:pointer;font-family:inherit;width:100%;text-align:left}
+.qs-resource-link:hover{background:#D4E8F5;border-color:var(--cdec-mid)}
+.qs-resource-link:focus-visible{outline:3px solid var(--cdec);outline-offset:2px}
+.qs-resource-icon{font-size:15px;flex-shrink:0}
+.qs-resource-name{font-size:12px;font-weight:700;color:var(--cdec-mid)}
+.qs-resource-type{font-size:11px;color:var(--text3);margin-top:1px}
 
-/* LANG MODAL */
-.lang-overlay{
-  display:none;
-  position:absolute;top:60px;right:1.25rem;
-  background:var(--color-surface);
-  border:1px solid var(--color-border);
-  border-radius:var(--radius-lg);
-  padding:1.25rem;width:260px;
-  box-shadow:0 4px 16px rgba(0,0,0,0.12);
-  z-index:200;
-}
-.lang-overlay.open{display:block}
-.lang-modal h2{font-size:14px;font-weight:600;margin-bottom:0.75rem;color:var(--color-text)}
-.lang-option{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:8px 0;border-bottom:1px solid var(--color-border);
-  cursor:pointer;font-size:13px;color:var(--color-text);
-  background:none;border-left:none;border-right:none;border-top:none;
-  width:100%;font-family:inherit;text-align:left;
-}
-.lang-option:last-child{border-bottom:none}
-.lang-option:hover{color:var(--color-cdec-mid)}
-.lang-close{
-  margin-top:0.75rem;width:100%;padding:8px;
-  background:var(--color-cdec);color:#fff;
-  border:none;border-radius:var(--radius-md);
-  font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;
-}
-.lang-close:hover{opacity:0.9}
+.hidden{display:none!important}
 
-/* RESPONSIVE */
-@media(max-width:580px){
-  .topbar-right .user-name,.topbar-right .user-role{display:none}
+@media(max-width:480px){
+  .main{padding:1rem .875rem 3rem}
   .grid-3{grid-template-columns:repeat(2,1fr)}
-  .main{padding:1rem 1rem 3rem}
+  .btn-sm{padding:4px 9px;font-size:11px}
 }
 </style>
 </head>
 <body>
 
-<h1 class="sr-only">CDEC Pro — Provider Workspace Prototype. Use the role tabs to switch between Individual, Center Director, and Specialist views.</h1>
-
-<!-- LANGUAGE MODAL -->
-<div class="lang-overlay" id="lang-overlay" role="dialog" aria-modal="true" aria-labelledby="lang-title">
-  <h2 id="lang-title">Select language / Seleccionar idioma</h2>
-  <button class="lang-option" onclick="setLang('English')">English <span>✓</span></button>
-  <button class="lang-option" onclick="setLang('Español')">Español</button>
-  <button class="lang-option" onclick="setLang('中文')">中文 (Chinese)</button>
-  <button class="lang-option" onclick="setLang('Soomaali')">Soomaali (Somali)</button>
-  <button class="lang-option" onclick="setLang('العربية')">العربية (Arabic)</button>
-  <button class="lang-option" onclick="setLang('Other')">Other / Otro →</button>
-  <button class="lang-close" onclick="closeLang()">Close</button>
-</div>
+<h1 class="sr-only">CDEC Pro Provider Workspace Prototype. Select your role to explore the workspace.</h1>
 
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="logo">
-    <div class="logo-mark"><span>CO</span></div>
+    <div class="logo-mark">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <rect width="22" height="22" rx="5" fill="#1A4B6E"/>
+        <path d="M4 16 C4 9 11 5 18 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <circle cx="11" cy="12" r="2.8" fill="#fff"/>
+      </svg>
+    </div>
     <div>
       <div class="logo-name">CDEC Pro</div>
       <div class="logo-sub">Colorado Dept. of Early Childhood</div>
     </div>
   </div>
   <div class="topbar-right">
-    <button class="lang-btn" onclick="openLang()" aria-label="Select language">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.3"/>
-        <path d="M8 1C8 1 5.5 4 5.5 8s2.5 7 2.5 7M8 1c0 0 2.5 3 2.5 7S8 15 8 15M1.5 6h13M1.5 10h13" stroke="currentColor" stroke-width="1.3"/>
-      </svg>
-      <span id="lang-label">English</span>
-    </button>
-    <div class="user-widget">
-      <div class="avatar" id="avatar-initials" aria-hidden="true">MR</div>
-      <div>
-        <div class="user-name" id="user-name-display">Maria Rodriguez</div>
-        <div class="user-role" id="user-role-display">Center Director · Sunshine Learning Center</div>
+    <div style="position:relative">
+      <button class="lang-btn" id="lang-btn" onclick="toggleLang()" aria-haspopup="true" aria-expanded="false" aria-label="Select language, currently English">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M8 1C8 1 5.5 4 5.5 8s2.5 7 2.5 7M8 1c0 0 2.5 3 2.5 7S8 15 8 15M1.5 6h13M1.5 10h13" stroke="currentColor" stroke-width="1.4"/></svg>
+        <span id="lang-label">EN</span>
+      </button>
+      <div class="lang-dropdown" id="lang-dd">
+        <button class="lang-opt" onclick="setLang('EN','English')">English</button>
+        <button class="lang-opt" onclick="setLang('ES','Español')">Español</button>
+        <button class="lang-opt" onclick="setLang('ZH','中文')">中文 (Chinese)</button>
+        <button class="lang-opt" onclick="setLang('SO','Soomaali')">Soomaali</button>
+        <button class="lang-opt" onclick="setLang('AR','العربية')">العربية</button>
+      </div>
+    </div>
+    <div class="user-chip">
+      <div class="avatar" id="av" aria-hidden="true">MR</div>
+      <div class="user-info">
+        <div class="user-name" id="uname">Maria Rodriguez</div>
+        <div class="user-role-text" id="urole">Center Director</div>
       </div>
     </div>
   </div>
 </header>
 
-<!-- ROLE BAR -->
-<nav aria-label="Role view switcher">
-  <div class="rolebar">
-    <div class="role-tabs" role="tablist">
-      <button class="role-tab" role="tab" aria-selected="false" id="tab-individual" onclick="switchRole('individual')">Individual</button>
-      <button class="role-tab active" role="tab" aria-selected="true" id="tab-director" onclick="switchRole('director')">Center Director</button>
-      <button class="role-tab" role="tab" aria-selected="false" id="tab-specialist" onclick="switchRole('specialist')">Specialist</button>
+<!-- ROLE SELECTOR -->
+<nav aria-label="Role selection">
+  <div class="role-selector">
+    <div class="role-selector-label" id="rsl">I am a…</div>
+    <div class="role-cards" role="tablist" aria-labelledby="rsl">
+      <button class="role-card" role="tab" aria-selected="false" id="rc-professional" onclick="switchRole('professional')">
+        <div class="role-icon">👩‍🏫</div>
+        <div><div class="role-card-name">Professional</div><div class="role-card-desc">Credentials &amp; career</div></div>
+      </button>
+      <button class="role-card active" role="tab" aria-selected="true" id="rc-director" onclick="switchRole('director')">
+        <div class="role-icon">🏫</div>
+        <div><div class="role-card-name">Center Director</div><div class="role-card-desc">Programs &amp; staff</div></div>
+      </button>
+      <button class="role-card" role="tab" aria-selected="false" id="rc-specialist" onclick="switchRole('specialist')">
+        <div class="role-icon">🧑‍⚕️</div>
+        <div><div class="role-card-name">Specialist</div><div class="role-card-desc">Caseload &amp; services</div></div>
+      </button>
+      <button class="role-card" role="tab" aria-selected="false" id="rc-upk" onclick="switchRole('upk')">
+        <div class="role-icon">⭐</div>
+        <div><div class="role-card-name">UPK MVP</div><div class="role-card-desc">Phase 1 preview</div></div>
+      </button>
     </div>
   </div>
-  <div class="role-note" id="role-note" aria-live="polite">
-    Center Director view: enrollment queue, staff management, program profile, billing — plus your own credentials.
-  </div>
+  <div class="role-note" id="role-note" aria-live="polite">Center Director view — use the tabs below to navigate Dashboard, Quality/License/Staff, and Programs.</div>
 </nav>
 
-<main class="main">
+<!-- DIRECTOR INNER TABS -->
+<div id="inner-tabs-bar" class="inner-tabs-bar">
+  <div class="inner-tabs" role="tablist" aria-label="Director workspace">
+    <button class="inner-tab active" role="tab" aria-selected="true" id="dt-dashboard" onclick="switchDTab('dashboard')">Dashboard</button>
+    <button class="inner-tab" role="tab" aria-selected="false" id="dt-quality" onclick="switchDTab('quality')">Quality / License / Staff</button>
+    <button class="inner-tab" role="tab" aria-selected="false" id="dt-programs" onclick="switchDTab('programs')">Programs</button>
+  </div>
+</div>
 
-<!-- ═══════════════ DIRECTOR VIEW ═══════════════ -->
-<div id="view-director">
+<!-- ══ DIRECTOR: DASHBOARD ══ -->
+<div id="dir-dashboard" class="main">
   <div style="margin-bottom:1rem">
-    <div class="welcome-name">Good morning, Maria</div>
-    <div class="welcome-sub">Sunshine Learning Center &mdash; Last updated today, 8:14 AM</div>
+    <div class="welcome">Good morning, Maria</div>
+    <div class="welcome-sub">Sunshine Learning Center — Sunday, April 27, 2025</div>
+  </div>
+  <div class="alert-bar alert-warn" role="alert">
+    <div class="alert-dot">4</div>
+    <div><strong>4 items need your attention:</strong> 2 enrollment decisions due, 1 staff cert expiring in 14 days, 1 CCCAP claim action needed.</div>
   </div>
 
-  <div class="alert-bar" role="alert">
-    <div class="alert-dot"><span aria-hidden="true">3</span></div>
-    <div>You have <strong>3 items needing action</strong> today: 2 enrollment decisions due and 1 staff certification expiring in 14 days.</div>
+  <div class="section-label">Enrollment &amp; capacity</div>
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="metric-num">18<span class="metric-denom">/20</span></div>
+      <div class="metric-label">UPK seats filled</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num" style="color:var(--warn-text)">2</div>
+      <div class="metric-label">Decisions pending</div>
+      <div style="margin-top:6px"><button class="item-action" onclick="switchDTab('programs')">Go to Programs →</button></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">6</div>
+      <div class="metric-label">CCCAP children</div>
+      <div style="margin-top:6px"><span class="badge badge-warn">1 claim pending</span></div>
+    </div>
   </div>
 
-  <div class="section-label">Universal preschool enrollment queue</div>
+  <div class="section-label">Quality &amp; compliance</div>
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="metric-num">4</div>
+      <div class="metric-label">QIS / Shines rating</div>
+      <div style="margin-top:6px"><button class="item-action" onclick="switchDTab('quality')">View details →</button></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">3<span class="metric-denom">/4</span></div>
+      <div class="metric-label">UPK standards in progress</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:75%;background:var(--warn-text)"></div></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num" style="font-size:17px;color:var(--ok-text)">Current</div>
+      <div class="metric-label">Licensing status</div>
+      <div style="margin-top:6px"><span class="badge badge-warn">Renew in 60 days</span></div>
+    </div>
+  </div>
+
+  <div class="section-label">Staff</div>
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-num">7</div>
+      <div class="metric-label">Staff members</div>
+      <div style="margin-top:6px"><span class="badge badge-warn">1 cert expiring</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">2</div>
+      <div class="metric-label">Staff with open PD goals</div>
+      <div style="margin-top:6px"><button class="item-action" onclick="switchDTab('quality')">View staff →</button></div>
+    </div>
+  </div>
+
+  <div class="section-label">Opportunities</div>
   <div class="card">
-    <div class="card-title">Pending placement decisions <span class="badge badge-warn">2 pending</span></div>
-    <div class="card-sub">Phase 1 seats — decisions due within 5 business days of offer</div>
+    <div class="card-title">Available right now</div>
+    <div class="item-row">
+      <div><div class="item-label">Quality Improvement Grant — Round 3</div><div class="item-sub">Open through June 15 · CO Shines</div></div>
+      <button class="item-action" onclick="extLink('Quality Improvement Grant')">Apply ↗</button>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">Early Childhood Workforce Tax Credit</div><div class="item-sub">Eligible staff may qualify · CCTC</div></div>
+      <button class="item-action" onclick="extLink('CCTC eligibility')">Learn more ↗</button>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">UPK Resource Bank</div><div class="item-sub">Toolkits, curricula &amp; self-assessments</div></div>
+      <button class="item-action" onclick="extLink('UPK Resource Bank')">Browse ↗</button>
+    </div>
+  </div>
+</div>
 
+<!-- ══ DIRECTOR: QUALITY/LICENSE/STAFF ══ -->
+<div id="dir-quality" class="main hidden">
+  <div class="section-label" style="margin-top:0">Licensing</div>
+  <div class="card">
+    <div class="card-title">Child Care License <span class="badge badge-ok">Current</span></div>
+    <div class="card-sub">CDEC child care licensing</div>
+    <div class="item-row"><div><div class="item-label">License number</div><div class="item-sub">CCL-2021-00482</div></div></div>
+    <div class="item-row"><div><div class="item-label">Licensed capacity</div><div class="item-sub">Infant: 8 · Toddler: 12 · Preschool: 20</div></div></div>
+    <div class="item-row">
+      <div><div class="item-label">Expiration date</div><div class="item-sub">December 14, 2025</div></div>
+      <span class="badge badge-warn">Renew in 60 days</span>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">Last inspection</div><div class="item-sub">February 2025 — no violations</div></div>
+      <span class="badge badge-ok">Passed</span>
+    </div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('CDEC licensing portal')">View license record ↗</button></div>
+  </div>
+
+  <div class="section-label">Quality improvement (QIS / Colorado Shines)</div>
+  <div class="card">
+    <div class="card-title">Colorado Shines Rating <span class="badge badge-info">Level 4</span></div>
+    <div class="card-sub">Colorado Quality Rating and Improvement System</div>
+    <div class="item-row">
+      <div><div class="item-label">Current rating</div><div class="item-sub">Achieved March 2024</div></div>
+      <span class="badge badge-info">Level 4 of 5</span>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">Next environmental observation</div><div class="item-sub">Required every 3 years · Last: Jan 2023</div></div>
+      <span class="badge badge-warn">Due by Jan 2026</span>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">Path to Level 5</div><div class="item-sub">CLASS score ≥ 5.0 + additional PD hours</div></div>
+      <button class="item-action" onclick="extLink('Colorado Shines Level 5 pathway')">View pathway ↗</button>
+    </div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('Colorado Shines Provider Hub')">Go to Provider Hub ↗</button></div>
+  </div>
+
+  <div class="section-label">Staff credentials &amp; professional development</div>
+  <div class="card">
+    <div class="card-title">Staff tracker</div>
+    <div class="card-sub">Certification and credential status for all staff</div>
+    <div class="staff-row">
+      <div class="staff-av" style="background:var(--warn-bg);color:var(--warn-text)">TW</div>
+      <div class="staff-info"><div class="staff-name">Tamara Willis — Lead Teacher</div><div class="staff-issue">CPR expires June 2, 2025 · ECPC Level III</div></div>
+      <span class="badge badge-warn">14 days</span>
+    </div>
+    <div class="staff-row">
+      <div class="staff-av" style="background:var(--info-bg);color:var(--info-text)">JM</div>
+      <div class="staff-info"><div class="staff-name">Jorge Martinez — Asst. Teacher</div><div class="staff-issue">ECE credential renewal in progress · ECPC Level II</div></div>
+      <span class="badge badge-info">In progress</span>
+    </div>
+    <div class="staff-row">
+      <div class="staff-av" style="background:var(--ok-bg);color:var(--ok-text)">AL</div>
+      <div class="staff-info"><div class="staff-name">Aisha Lin — Teacher</div><div class="staff-issue">All credentials current · ECPC Level III</div></div>
+      <span class="badge badge-ok">Current</span>
+    </div>
+    <div class="staff-row">
+      <div class="staff-av" style="background:var(--ok-bg);color:var(--ok-text)">RP</div>
+      <div class="staff-info"><div class="staff-name">Rosa Park — Teacher</div><div class="staff-issue">All credentials current · ECPC Level II</div></div>
+      <span class="badge badge-ok">Current</span>
+    </div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('PDIS staff management')">Manage all staff in PDIS ↗</button></div>
+  </div>
+
+  <div class="section-label">Program profile</div>
+  <div class="card">
+    <div class="card-title">Sunshine Learning Center</div>
+    <div class="card-sub">Keep your profile current — families and coordinators rely on this</div>
+    <div class="item-row">
+      <div><div class="item-label">Program description</div><div class="item-sub">Last updated 3 months ago</div></div>
+      <button class="item-action" onclick="extLink('Edit program description')">Edit</button>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">Current vacancies</div><div class="item-sub">Infant: 2 · Toddler: 0 · Preschool: 2</div></div>
+      <button class="item-action" onclick="extLink('Update vacancies')">Update</button>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">Hours &amp; schedule</div><div class="item-sub">M–F, 7:00 AM – 5:30 PM</div></div>
+      <button class="item-action" onclick="extLink('Edit hours')">Edit</button>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">Languages spoken</div><div class="item-sub">English, Spanish</div></div>
+      <button class="item-action" onclick="extLink('Edit languages')">Edit</button>
+    </div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('Public program profile')">View public profile ↗</button></div>
+  </div>
+
+  <div class="section-label">Coming in future phases</div>
+  <div class="coming-card">
+    <div class="coming-icon">📋</div>
+    <div><div class="coming-title">Coaching &amp; technical assistance</div><div class="coming-body">Connect with your assigned coach, track TA visits, and access quality improvement resources tied to your QIS level.</div></div>
+  </div>
+</div>
+
+<!-- ══ DIRECTOR: PROGRAMS ══ -->
+<div id="dir-programs" class="main hidden">
+  <div class="section-label" style="margin-top:0">Universal Preschool (UPK)</div>
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-title">Enrollment queue <span class="badge badge-warn">2 pending</span></div>
+    <div class="card-sub">Phase 1 seats — decisions due within 5 business days</div>
     <div class="enroll-item">
-      <div class="enroll-row1">
-        <div class="enroll-child">Amara Johnson</div>
-        <span class="badge badge-warn">Offer expires in 3 days</span>
-      </div>
-      <div class="enroll-detail">DOB 09/14/2020 &middot; Offered: M/W/F AM session &middot; Family contact: Keisha Johnson</div>
+      <div class="enroll-row1"><div class="enroll-child">Amara Johnson</div><span class="badge badge-warn">Expires in 3 days</span></div>
+      <div class="enroll-detail">DOB 09/14/2020 · M/W/F AM · Family: Keisha Johnson</div>
       <div class="enroll-actions">
         <button class="btn-sm accept" onclick="enrollAction('accept','Amara')">Accept</button>
         <button class="btn-sm decline" onclick="enrollAction('decline','Amara')">Decline</button>
         <button class="btn-sm waitlist" onclick="enrollAction('waitlist','Amara')">Waitlist</button>
-        <button class="btn-sm" onclick="extLink('UPK portal — child detail for Amara Johnson')">View details ↗</button>
+        <button class="btn-sm" onclick="extLink('UPK — Amara detail')">Details ↗</button>
       </div>
     </div>
-
     <div class="enroll-item">
-      <div class="enroll-row1">
-        <div class="enroll-child">Devon Park</div>
-        <span class="badge badge-info">New offer today</span>
-      </div>
-      <div class="enroll-detail">DOB 11/02/2020 &middot; Offered: T/Th/F PM session &middot; Family contact: Min-jun Park</div>
+      <div class="enroll-row1"><div class="enroll-child">Devon Park</div><span class="badge badge-info">New today</span></div>
+      <div class="enroll-detail">DOB 11/02/2020 · T/Th/F PM · Family: Min-jun Park</div>
       <div class="enroll-actions">
         <button class="btn-sm accept" onclick="enrollAction('accept','Devon')">Accept</button>
         <button class="btn-sm decline" onclick="enrollAction('decline','Devon')">Decline</button>
         <button class="btn-sm waitlist" onclick="enrollAction('waitlist','Devon')">Waitlist</button>
-        <button class="btn-sm" onclick="extLink('UPK portal — child detail for Devon Park')">View details ↗</button>
+        <button class="btn-sm" onclick="extLink('UPK — Devon detail')">Details ↗</button>
+      </div>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-bottom:10px">
+    <div class="metric-card"><div class="metric-num">18<span class="metric-denom">/20</span></div><div class="metric-label">UPK seats filled</div><div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div></div>
+    <div class="metric-card"><div class="metric-num" style="font-size:17px;color:var(--ok-text)">Submitted</div><div class="metric-label">April attendance</div><div style="margin-top:6px"><span class="badge badge-ok">March paid $4,320</span></div></div>
+  </div>
+  <button class="link-out" onclick="extLink('UPK payment portal')">
+    <div><div class="link-out-label">UPK reimbursement &amp; payments</div><div class="link-out-sub">View history and submit attendance</div></div>
+    <span class="link-out-ext">↗</span>
+  </button>
+
+  <div class="section-label" style="margin-top:1.25rem">CCCAP Subsidy Program</div>
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-title">Authorization status</div>
+    <div class="card-sub">Child Care Assistance Program — active subsidies</div>
+    <div class="item-row"><div><div class="item-label">Active subsidy children</div></div><span style="font-size:16px;font-weight:700">6</span></div>
+    <div class="item-row">
+      <div><div class="item-label">Marcus T.</div><div class="item-sub">Authorization expires June 30 · Redetermination due</div></div>
+      <span class="badge badge-warn">Action needed</span>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">Sofia R.</div><div class="item-sub">Authorization current through Sept 2025</div></div>
+      <span class="badge badge-ok">Current</span>
+    </div>
+    <div class="item-row">
+      <div><div class="item-label">4 other children</div><div class="item-sub">All authorizations current</div></div>
+      <span class="badge badge-ok">Current</span>
+    </div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('CCCAP — full authorization list')">View all authorizations ↗</button></div>
+  </div>
+  <div class="grid-2" style="margin-bottom:10px">
+    <div class="metric-card"><div class="metric-num" style="font-size:17px;color:var(--warn-text)">1 pending</div><div class="metric-label">Claims needing action</div><div style="margin-top:6px"><button class="item-action" onclick="extLink('CCCAP billing portal')">Go to portal ↗</button></div></div>
+    <div class="metric-card"><div class="metric-num">$2,180</div><div class="metric-label">March CCCAP payment</div><div style="margin-top:6px"><span class="badge badge-ok">Paid</span></div></div>
+  </div>
+  <button class="link-out" onclick="extLink('CCCAP billing portal')">
+    <div><div class="link-out-label">CCCAP billing portal</div><div class="link-out-sub">Submit claims, view payment history</div></div>
+    <span class="link-out-ext">External ↗</span>
+  </button>
+
+  <div class="section-label" style="margin-top:1.25rem">Coming in future phases</div>
+  <div class="coming-card"><div class="coming-icon">📦</div><div><div class="coming-title">Early Intervention coordination</div><div class="coming-body">View children with IFSPs in your program and coordinate with EI specialists.</div></div></div>
+  <div class="coming-card"><div class="coming-icon">💳</div><div><div class="coming-title">Unified payments view</div><div class="coming-body">UPK, CCCAP, and future program payments in one timeline — no more separate portals.</div></div></div>
+</div>
+
+<!-- ══ PROFESSIONAL VIEW ══ -->
+<div id="view-professional" class="main hidden">
+  <div style="margin-bottom:1rem"><div class="welcome">Good morning, Tamara</div><div class="welcome-sub">Sunshine Learning Center — Lead Teacher, Preschool Room</div></div>
+  <div class="alert-bar alert-warn" role="alert"><div class="alert-dot">1</div><div>Your <strong>CPR certification expires in 14 days</strong>. Complete renewal to stay in compliance.</div></div>
+
+  <div class="section-label">My credentials &amp; certifications</div>
+  <div class="card">
+    <div class="item-row"><div><div class="item-label">CPR / First Aid</div><div class="item-sub">Expires June 2, 2025</div></div><span class="badge badge-warn">Renew soon</span></div>
+    <div class="item-row"><div><div class="item-label">ECE Associate Credential</div><div class="item-sub">Active — renewed Jan 2025</div></div><span class="badge badge-ok">Current</span></div>
+    <div class="item-row"><div><div class="item-label">Annual health &amp; safety training</div><div class="item-sub">Completed March 2025</div></div><span class="badge badge-ok">Current</span></div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('PDIS — my credential record')">View full record in PDIS ↗</button></div>
+  </div>
+
+  <div class="section-label">My ECPC level &amp; career pathway</div>
+  <div class="card">
+    <div class="card-title">Early Childhood Professional Credential</div>
+    <div class="card-sub">Colorado's career lattice for early childhood professionals</div>
+    <div class="item-row"><div><div class="item-label">Current level</div></div><span class="badge badge-info">ECPC Level III</span></div>
+    <div class="item-row"><div><div class="item-label">Path to Level IV</div><div class="item-sub">12 credit hours remaining</div></div><button class="item-action" onclick="extLink('PDIS pathway planner')">View pathway ↗</button></div>
+    <div class="item-row"><div><div class="item-label">Workforce Tax Credit (CCTC)</div><div class="item-sub">You may be eligible at your ECPC level</div></div><button class="item-action" onclick="extLink('CCTC eligibility')">Check eligibility ↗</button></div>
+  </div>
+
+  <div class="section-label">My professional development</div>
+  <div class="card">
+    <div class="item-row"><div><div class="item-label">Trauma-Informed Care — Module 2</div><div class="item-sub">Online · Self-paced · 2 credit hours</div></div><button class="item-action" onclick="extLink('PDIS — Trauma-Informed Care')">Continue ↗</button></div>
+    <div class="item-row"><div><div class="item-label">CPR Renewal — In-person</div><div class="item-sub">May 28 · Aurora Community Center</div></div><button class="item-action" onclick="extLink('PDIS — CPR renewal registration')">Register ↗</button></div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('PDIS training catalog')">Browse all training in PDIS ↗</button></div>
+  </div>
+
+  <div class="section-label">Coming in future phases</div>
+  <div class="coming-card"><div class="coming-icon">💰</div><div><div class="coming-title">Pay equity tool</div><div class="coming-body">See how your compensation compares to Colorado wage benchmarks for your ECPC level.</div></div></div>
+  <div class="coming-card"><div class="coming-icon">🤝</div><div><div class="coming-title">My coaching connections</div><div class="coming-body">View your assigned coach and upcoming sessions.</div></div></div>
+</div>
+
+<!-- ══ SPECIALIST VIEW ══ -->
+<div id="view-specialist" class="main hidden">
+  <div style="margin-bottom:1rem"><div class="welcome">Good morning, Dr. Chen</div><div class="welcome-sub">Early Intervention Specialist — Denver Metro Region</div></div>
+
+  <div class="section-label">My caseload</div>
+  <div class="card">
+    <div class="card-title">Active children <span class="badge badge-info">14 active</span></div>
+    <div class="card-sub">Children with IFSPs in your caseload</div>
+    <div class="staff-row"><div class="staff-av" style="background:var(--warn-bg);color:var(--warn-text)">LT</div><div class="staff-info"><div class="staff-name">Lena T. — age 2y 4m</div><div class="staff-issue">IFSP review due May 15 · Speech, OT</div></div><span class="badge badge-warn">Due soon</span></div>
+    <div class="staff-row"><div class="staff-av" style="background:var(--info-bg);color:var(--info-text)">MR</div><div class="staff-info"><div class="staff-name">Marcus R. — age 1y 11m</div><div class="staff-issue">Transition planning — UPK eligibility screen needed</div></div><span class="badge badge-info">Action needed</span></div>
+    <div class="staff-row"><div class="staff-av" style="background:var(--ok-bg);color:var(--ok-text)">SW</div><div class="staff-info"><div class="staff-name">Sofia W. — age 2y 8m</div><div class="staff-issue">Annual IFSP — all services current</div></div><span class="badge badge-ok">On track</span></div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('EI system — full caseload')">View full caseload ↗</button></div>
+  </div>
+
+  <div class="section-label">My credentials</div>
+  <div class="card">
+    <div class="item-row"><div><div class="item-label">EI Specialist certification</div><div class="item-sub">Renewal Dec 2026</div></div><span class="badge badge-ok">Current</span></div>
+    <div class="item-row"><div><div class="item-label">CPR / First Aid</div><div class="item-sub">Renewal Sept 2025</div></div><span class="badge badge-ok">Current</span></div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('PDIS — Dr. Chen credential record')">View record in PDIS ↗</button></div>
+  </div>
+
+  <div class="section-label">Connected systems</div>
+  <button class="link-out" onclick="extLink('Early Intervention data system')"><div><div class="link-out-label">Early Intervention system</div><div class="link-out-sub">IFSPs, service logs, referrals</div></div><span class="link-out-ext">External ↗</span></button>
+  <button class="link-out" onclick="extLink('UPK transition tool')"><div><div class="link-out-label">UPK transition tool</div><div class="link-out-sub">Screen children aging into preschool eligibility</div></div><span class="link-out-ext">External ↗</span></button>
+  <button class="link-out" onclick="extLink('PDIS training catalog')"><div><div class="link-out-label">PDIS training catalog</div><div class="link-out-sub">Professional development for your specialty</div></div><span class="link-out-ext">External ↗</span></button>
+</div>
+
+<!-- ══ UPK MVP VIEW ══ -->
+<div id="view-upk" class="main hidden">
+  <div style="margin-bottom:1rem"><div class="welcome">UPK Provider Workspace</div><div class="welcome-sub">Sunshine Learning Center — Universal Preschool Phase 1 MVP</div></div>
+  <div class="alert-bar alert-info" role="alert"><div class="alert-dot" style="font-size:11px">ℹ</div><div>This is a preview of <strong>Phase 1</strong> — the first things built before the full Director workspace is complete.</div></div>
+
+  <div class="section-label">Enrollment queue</div>
+  <div class="card">
+    <div class="card-title">Pending placement decisions <span class="badge badge-warn">2 pending</span></div>
+    <div class="card-sub">Phase 1 seats — decisions due within 5 business days of offer</div>
+    <div class="enroll-item">
+      <div class="enroll-row1"><div class="enroll-child">Amara Johnson</div><span class="badge badge-warn">Expires in 3 days</span></div>
+      <div class="enroll-detail">DOB 09/14/2020 · M/W/F AM · Family: Keisha Johnson</div>
+      <div class="enroll-actions">
+        <button class="btn-sm accept" onclick="enrollAction('accept','Amara')">Accept</button>
+        <button class="btn-sm decline" onclick="enrollAction('decline','Amara')">Decline</button>
+        <button class="btn-sm waitlist" onclick="enrollAction('waitlist','Amara')">Waitlist</button>
+        <button class="btn-sm" onclick="extLink('UPK — Amara detail')">Details ↗</button>
+      </div>
+    </div>
+    <div class="enroll-item">
+      <div class="enroll-row1"><div class="enroll-child">Devon Park</div><span class="badge badge-info">New today</span></div>
+      <div class="enroll-detail">DOB 11/02/2020 · T/Th/F PM · Family: Min-jun Park</div>
+      <div class="enroll-actions">
+        <button class="btn-sm accept" onclick="enrollAction('accept','Devon')">Accept</button>
+        <button class="btn-sm decline" onclick="enrollAction('decline','Devon')">Decline</button>
+        <button class="btn-sm waitlist" onclick="enrollAction('waitlist','Devon')">Waitlist</button>
+        <button class="btn-sm" onclick="extLink('UPK — Devon detail')">Details ↗</button>
       </div>
     </div>
   </div>
 
   <div class="section-label">Program snapshot</div>
   <div class="grid-3">
-    <div class="metric-card">
-      <div class="metric-num">18 <span class="metric-denom">/ 20</span></div>
-      <div class="metric-label">UPK seats filled</div>
-      <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-num">7</div>
-      <div class="metric-label">Staff members</div>
-      <div style="margin-top:7px"><span class="badge badge-warn">1 cert expiring</span></div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-num">4</div>
-      <div class="metric-label">Colorado Shines rating</div>
-      <div style="margin-top:7px"><button class="item-action" onclick="extLink('Colorado Shines quality rating report')">View report ↗</button></div>
+    <div class="metric-card"><div class="metric-num">18<span class="metric-denom">/20</span></div><div class="metric-label">UPK seats filled</div><div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div></div>
+    <div class="metric-card"><div class="metric-num">2</div><div class="metric-label">AM vacancies</div><div style="margin-top:6px"><span class="badge badge-info">2 offers pending</span></div></div>
+    <div class="metric-card"><div class="metric-num" style="font-size:17px;color:var(--ok-text)">Submitted</div><div class="metric-label">April attendance</div><div style="margin-top:6px"><span class="badge badge-ok">March paid $4,320</span></div></div>
+  </div>
+
+  <div class="section-label" style="margin-top:1.25rem">UPK quality standards — self-assessment</div>
+  <p style="font-size:12px;color:var(--text3);margin-bottom:12px">Select your current status in each area. Resources are linked for each standard to help you get there.</p>
+
+  <div class="qs-area" id="qs1">
+    <button class="qs-header" onclick="toggleQS('qs1')" aria-expanded="false">
+      <div class="qs-left"><div class="qs-icon" style="background:#FEF3E2">👩‍🏫</div><div><div class="qs-name">Teacher Quality &amp; Workforce</div><div class="qs-req">Staff qualifications, ECPC levels, ongoing professional development</div></div></div>
+      <div class="qs-right"><span class="badge badge-info" id="qs1-badge">In Progress</span><span class="qs-chevron" aria-hidden="true">▼</span></div>
+    </button>
+    <div class="qs-body">
+      <div class="qs-self-label">How is your program doing in this area?</div>
+      <div class="qs-options">
+        <button class="qs-opt" onclick="setQS('qs1',this,'not','Not started','badge-danger')">Not started</button>
+        <button class="qs-opt sel-progress" onclick="setQS('qs1',this,'progress','In Progress','badge-info')">In progress</button>
+        <button class="qs-opt" onclick="setQS('qs1',this,'meeting','Meeting standard','badge-ok')">Meeting standard</button>
+      </div>
+      <div class="qs-resource-label">Resources from the UPK Resource Bank</div>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — Checklist of Requirements')"><span class="qs-resource-icon">📋</span><div><div class="qs-resource-name">Checklist of Requirements for Universal Preschool</div><div class="qs-resource-type">Checklist · UPK Resource Bank</div></div></button>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — ECPC Pathway Guidance')"><span class="qs-resource-icon">🎓</span><div><div class="qs-resource-name">ECPC Pathway Guidance for UPK Teachers</div><div class="qs-resource-type">Guide · UPK Resource Bank</div></div></button>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — all Teacher Quality resources')"><span class="qs-resource-icon">↗</span><div><div class="qs-resource-name">View all Teacher Quality &amp; Workforce resources</div><div class="qs-resource-type">UPK Resource Bank</div></div></button>
     </div>
   </div>
 
-  <div class="section-label">Staff attention needed</div>
+  <div class="qs-area" id="qs2">
+    <button class="qs-header" onclick="toggleQS('qs2')" aria-expanded="false">
+      <div class="qs-left"><div class="qs-icon" style="background:#EAF3DE">📚</div><div><div class="qs-name">Instructional Practice</div><div class="qs-req">Curriculum, environmental quality, CLASS observation</div></div></div>
+      <div class="qs-right"><span class="badge badge-ok" id="qs2-badge">Meeting standard</span><span class="qs-chevron" aria-hidden="true">▼</span></div>
+    </button>
+    <div class="qs-body">
+      <div class="qs-self-label">How is your program doing in this area?</div>
+      <div class="qs-options">
+        <button class="qs-opt" onclick="setQS('qs2',this,'not','Not started','badge-danger')">Not started</button>
+        <button class="qs-opt" onclick="setQS('qs2',this,'progress','In Progress','badge-info')">In progress</button>
+        <button class="qs-opt sel-meeting" onclick="setQS('qs2',this,'meeting','Meeting standard','badge-ok')">Meeting standard</button>
+      </div>
+      <div class="qs-resource-label">Resources from the UPK Resource Bank</div>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — Curricula List')"><span class="qs-resource-icon">📖</span><div><div class="qs-resource-name">Universal Preschool Curricula List</div><div class="qs-resource-type">Approved curricula · UPK Resource Bank</div></div></button>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — Colorado Early Learning Guidelines')"><span class="qs-resource-icon">📋</span><div><div class="qs-resource-name">Colorado Early Learning &amp; Development Guidelines</div><div class="qs-resource-type">Reference · UPK Resource Bank</div></div></button>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — all Instructional Practice resources')"><span class="qs-resource-icon">↗</span><div><div class="qs-resource-name">View all Instructional Practice resources</div><div class="qs-resource-type">UPK Resource Bank</div></div></button>
+    </div>
+  </div>
+
+  <div class="qs-area" id="qs3">
+    <button class="qs-header" onclick="toggleQS('qs3')" aria-expanded="false">
+      <div class="qs-left"><div class="qs-icon" style="background:#FDECEC">❤️</div><div><div class="qs-name">Healthy Development</div><div class="qs-req">Developmental screenings, referrals, translation services</div></div></div>
+      <div class="qs-right"><span class="badge badge-info" id="qs3-badge">In Progress</span><span class="qs-chevron" aria-hidden="true">▼</span></div>
+    </button>
+    <div class="qs-body">
+      <div class="qs-self-label">How is your program doing in this area?</div>
+      <div class="qs-options">
+        <button class="qs-opt" onclick="setQS('qs3',this,'not','Not started','badge-danger')">Not started</button>
+        <button class="qs-opt sel-progress" onclick="setQS('qs3',this,'progress','In Progress','badge-info')">In progress</button>
+        <button class="qs-opt" onclick="setQS('qs3',this,'meeting','Meeting standard','badge-ok')">Meeting standard</button>
+      </div>
+      <div class="qs-resource-label">Resources from the UPK Resource Bank</div>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — Nurturing Connections Colorado')"><span class="qs-resource-icon">🤝</span><div><div class="qs-resource-name">Nurturing Connections Colorado</div><div class="qs-resource-type">Program resource · UPK Resource Bank</div></div></button>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — General Health Appraisal Form')"><span class="qs-resource-icon">📋</span><div><div class="qs-resource-name">General Health Appraisal Form</div><div class="qs-resource-type">Form · UPK Resource Bank</div></div></button>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — all Healthy Development resources')"><span class="qs-resource-icon">↗</span><div><div class="qs-resource-name">View all Healthy Development resources</div><div class="qs-resource-type">UPK Resource Bank</div></div></button>
+    </div>
+  </div>
+
+  <div class="qs-area" id="qs4">
+    <button class="qs-header" onclick="toggleQS('qs4')" aria-expanded="false">
+      <div class="qs-left"><div class="qs-icon" style="background:#E8F1F8">👨‍👩‍👧</div><div><div class="qs-name">Family &amp; Community Engagement</div><div class="qs-req">Family input, socio-cultural practices, community partnerships</div></div></div>
+      <div class="qs-right"><span class="badge badge-danger" id="qs4-badge">Not started</span><span class="qs-chevron" aria-hidden="true">▼</span></div>
+    </button>
+    <div class="qs-body">
+      <div class="qs-self-label">How is your program doing in this area?</div>
+      <div class="qs-options">
+        <button class="qs-opt sel-not" onclick="setQS('qs4',this,'not','Not started','badge-danger')">Not started</button>
+        <button class="qs-opt" onclick="setQS('qs4',this,'progress','In Progress','badge-info')">In progress</button>
+        <button class="qs-opt" onclick="setQS('qs4',this,'meeting','Meeting standard','badge-ok')">Meeting standard</button>
+      </div>
+      <div class="qs-resource-label">Resources from the UPK Resource Bank</div>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — Sample Policies for Family Engagement')"><span class="qs-resource-icon">📄</span><div><div class="qs-resource-name">Sample Policies for Family Engagement</div><div class="qs-resource-type">Template · UPK Resource Bank</div></div></button>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — Family Resource Center Landscape Scan')"><span class="qs-resource-icon">🗺️</span><div><div class="qs-resource-name">Family Resource Center Landscape Scan</div><div class="qs-resource-type">Reference · UPK Resource Bank</div></div></button>
+      <button class="qs-resource-link" onclick="extLink('UPK Resource Bank — all Family Engagement resources')"><span class="qs-resource-icon">↗</span><div><div class="qs-resource-name">View all Family &amp; Community Engagement resources</div><div class="qs-resource-type">UPK Resource Bank</div></div></button>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:1.25rem">Program profile</div>
   <div class="card">
-    <div class="card-title">Certification &amp; credential tracker</div>
-    <div class="card-sub">Staff with upcoming or overdue items</div>
-    <div class="staff-row">
-      <div class="staff-avatar">TW</div>
-      <div class="staff-info">
-        <div class="staff-name">Tamara Willis</div>
-        <div class="staff-issue">CPR certification expires June 2, 2025</div>
-      </div>
-      <span class="badge badge-warn">14 days</span>
-    </div>
-    <div class="staff-row">
-      <div class="staff-avatar">JM</div>
-      <div class="staff-info">
-        <div class="staff-name">Jorge Martinez</div>
-        <div class="staff-issue">ECE credential renewal — in progress</div>
-      </div>
-      <span class="badge badge-info">In progress</span>
-    </div>
-    <div class="staff-row">
-      <div class="staff-avatar">AL</div>
-      <div class="staff-info">
-        <div class="staff-name">Aisha Lin</div>
-        <div class="staff-issue">All credentials current</div>
-      </div>
-      <span class="badge badge-ok">Current</span>
-    </div>
-    <div style="margin-top:10px">
-      <button class="item-action" onclick="extLink('PDIS staff management for Sunshine Learning Center')">Manage all staff in PDIS ↗</button>
-    </div>
+    <div class="card-title">Sunshine Learning Center <span class="badge badge-gray">Read only</span></div>
+    <div class="card-sub">Edit your full profile in the profile settings.</div>
+    <div class="item-row"><div><div class="item-label">UPK participation status</div></div><span class="badge badge-ok">Active participant</span></div>
+    <div class="item-row"><div><div class="item-label">Sessions offered</div><div class="item-sub">M/W/F AM · T/Th/F PM</div></div></div>
+    <div class="item-row"><div><div class="item-label">Address</div><div class="item-sub">1420 Sunshine Blvd, Aurora, CO 80010</div></div></div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('Full program profile editor')">Edit profile ↗</button></div>
   </div>
 
-  <div class="section-label">Program profile</div>
+  <div class="section-label">Payments &amp; reimbursement</div>
   <div class="card">
-    <div class="card-title">Sunshine Learning Center</div>
-    <div class="card-sub">Keep your profile current — families and coordinators rely on this information</div>
-    <div class="item-row">
-      <div><div class="item-label">Program description</div><div class="item-sub">Last updated 3 months ago</div></div>
-      <button class="item-action" onclick="extLink('Edit program description')">Edit</button>
-    </div>
-    <div class="item-row">
-      <div><div class="item-label">Current vacancies</div><div class="item-sub">Infant: 2 &middot; Toddler: 0 &middot; Preschool: 2</div></div>
-      <button class="item-action" onclick="extLink('Update vacancy counts')">Update</button>
-    </div>
-    <div class="item-row">
-      <div><div class="item-label">Hours &amp; schedule</div><div class="item-sub">M–F, 7:00 AM – 5:30 PM</div></div>
-      <button class="item-action" onclick="extLink('Edit hours and schedule')">Edit</button>
-    </div>
-    <div style="margin-top:10px">
-      <button class="item-action" onclick="extLink('Full program profile on CDEC Pro')">View full profile ↗</button>
-    </div>
-  </div>
-
-  <div class="section-label">Payments &amp; billing</div>
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">UPK reimbursement</div>
-      <div class="card-sub">Current period</div>
-      <div class="item-row">
-        <div class="item-label">April attendance submitted</div>
-        <span class="badge badge-ok">Submitted</span>
-      </div>
-      <div class="item-row">
-        <div class="item-label">March payment</div>
-        <span class="badge badge-ok">Paid $4,320</span>
-      </div>
-      <div style="margin-top:10px">
-        <button class="item-action" onclick="extLink('UPK payment portal')">View payment history ↗</button>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">CCCAP subsidy</div>
-      <div class="card-sub">Subsidy program billing</div>
-      <div class="item-row">
-        <div class="item-label">Active subsidy children</div>
-        <div class="item-label" style="font-weight:600">6</div>
-      </div>
-      <div class="item-row">
-        <div class="item-label">Pending claims</div>
-        <span class="badge badge-warn">1 action needed</span>
-      </div>
-      <div style="margin-top:10px">
-        <button class="item-action" onclick="extLink('CCCAP billing portal — external system')">Go to CCCAP portal ↗</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-label">Coming in future phases</div>
-  <div class="coming-card">
-    <div class="coming-icon">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#888" stroke-width="1.3"/><path d="M8 5v3.5l2 2" stroke="#888" stroke-width="1.3" stroke-linecap="round"/></svg>
-    </div>
-    <div><div class="coming-title">Coaching &amp; technical assistance</div><div class="coming-body">Connect with your assigned coach, track TA visits, and access quality improvement resources.</div></div>
-  </div>
-  <div class="coming-card">
-    <div class="coming-icon">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2" stroke="#888" stroke-width="1.3"/><path d="M5 7h6M5 10h4" stroke="#888" stroke-width="1.3" stroke-linecap="round"/></svg>
-    </div>
-    <div><div class="coming-title">Early Intervention coordination</div><div class="coming-body">View children with IFSPs in your program and coordinate with EI specialists.</div></div>
+    <div class="card-title">UPK reimbursement</div>
+    <div class="card-sub">Current program year</div>
+    <div class="item-row"><div><div class="item-label">April attendance</div></div><span class="badge badge-ok">Submitted</span></div>
+    <div class="item-row"><div><div class="item-label">March payment</div></div><span class="badge badge-ok">Paid $4,320</span></div>
+    <div class="item-row"><div><div class="item-label">February payment</div></div><span class="badge badge-ok">Paid $4,100</span></div>
+    <div style="margin-top:10px"><button class="item-action" onclick="extLink('UPK payment portal — full history')">View full payment history ↗</button></div>
   </div>
 </div>
-
-<!-- ═══════════════ INDIVIDUAL VIEW ═══════════════ -->
-<div id="view-individual" class="hidden">
-  <div style="margin-bottom:1rem">
-    <div class="welcome-name">Good morning, Tamara</div>
-    <div class="welcome-sub">Sunshine Learning Center &mdash; Lead Teacher, Preschool Room</div>
-  </div>
-
-  <div class="alert-bar" role="alert">
-    <div class="alert-dot"><span aria-hidden="true">1</span></div>
-    <div>Your CPR certification expires in <strong>14 days</strong>. Complete renewal to stay in compliance.</div>
-  </div>
-
-  <div class="section-label">My credentials &amp; certifications</div>
-  <div class="card">
-    <div class="item-row">
-      <div><div class="item-label">CPR / First Aid</div><div class="item-sub">Expires June 2, 2025</div></div>
-      <span class="badge badge-warn">Renew soon</span>
-    </div>
-    <div class="item-row">
-      <div><div class="item-label">ECE Associate Credential</div><div class="item-sub">Active — renewed Jan 2025</div></div>
-      <span class="badge badge-ok">Current</span>
-    </div>
-    <div class="item-row">
-      <div><div class="item-label">Annual health &amp; safety training</div><div class="item-sub">Completed March 2025</div></div>
-      <span class="badge badge-ok">Current</span>
-    </div>
-    <div style="margin-top:10px">
-      <button class="item-action" onclick="extLink('PDIS — full credential and training record')">View full record in PDIS ↗</button>
-    </div>
-  </div>
-
-  <div class="section-label">My ECPC level &amp; opportunities</div>
-  <div class="card">
-    <div class="card-title">Early Childhood Professional Credential</div>
-    <div class="card-sub">Colorado's career lattice for early childhood professionals</div>
-    <div class="item-row">
-      <div><div class="item-label">Current ECPC level</div></div>
-      <span class="badge badge-info">Level III</span>
-    </div>
-    <div class="item-row">
-      <div><div class="item-label">Next level requirements</div><div class="item-sub">12 credit hours remaining toward Level IV</div></div>
-      <button class="item-action" onclick="extLink('PDIS pathway planner')">View pathway ↗</button>
-    </div>
-    <div class="item-row">
-      <div><div class="item-label">Tax credit eligibility</div><div class="item-sub">CCTC — Early Childhood Workforce Tax Credit</div></div>
-      <button class="item-action" onclick="extLink('CCTC eligibility info and application')">Check eligibility ↗</button>
-    </div>
-  </div>
-
-  <div class="section-label">My professional development</div>
-  <div class="card">
-    <div class="card-title">Upcoming training</div>
-    <div class="item-row">
-      <div><div class="item-label">Trauma-Informed Care — Module 2</div><div class="item-sub">Online &middot; Self-paced &middot; 2 credit hours</div></div>
-      <button class="item-action" onclick="extLink('PDIS training — Trauma-Informed Care Module 2')">Continue ↗</button>
-    </div>
-    <div class="item-row">
-      <div><div class="item-label">CPR Renewal — In-person</div><div class="item-sub">May 28, 2025 &middot; Aurora Community Center</div></div>
-      <button class="item-action" onclick="extLink('PDIS registration — CPR renewal course')">Register ↗</button>
-    </div>
-    <div style="margin-top:10px">
-      <button class="item-action" onclick="extLink('PDIS training catalog')">Browse all training in PDIS ↗</button>
-    </div>
-  </div>
-
-  <div class="section-label">Coming in future phases</div>
-  <div class="coming-card">
-    <div class="coming-icon">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#888" stroke-width="1.3"/><path d="M8 5v3.5l2 2" stroke="#888" stroke-width="1.3" stroke-linecap="round"/></svg>
-    </div>
-    <div><div class="coming-title">Pay equity tool</div><div class="coming-body">See how your compensation compares to Colorado wage benchmarks for your ECPC level and role.</div></div>
-  </div>
-  <div class="coming-card">
-    <div class="coming-icon">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3" width="12" height="10" rx="2" stroke="#888" stroke-width="1.3"/><path d="M5 7h6M5 10h4" stroke="#888" stroke-width="1.3" stroke-linecap="round"/></svg>
-    </div>
-    <div><div class="coming-title">My coaching connections</div><div class="coming-body">View your assigned coach, upcoming coaching sessions, and improvement goals.</div></div>
-  </div>
-</div>
-
-<!-- ═══════════════ SPECIALIST VIEW ═══════════════ -->
-<div id="view-specialist" class="hidden">
-  <div style="margin-bottom:1rem">
-    <div class="welcome-name">Good morning, Dr. Chen</div>
-    <div class="welcome-sub">Early Intervention Specialist &mdash; Denver Metro Region</div>
-  </div>
-
-  <div class="section-label">My caseload</div>
-  <div class="card">
-    <div class="card-title">Active children <span class="badge badge-info">14 active</span></div>
-    <div class="card-sub">Children with IFSPs in your active caseload</div>
-    <div class="staff-row">
-      <div class="staff-avatar" style="background:#EAF3DE;color:#27500A">LT</div>
-      <div class="staff-info">
-        <div class="staff-name">Lena T. — age 2y 4m</div>
-        <div class="staff-issue">IFSP review due May 15 &middot; Speech, OT services</div>
-      </div>
-      <span class="badge badge-warn">Due soon</span>
-    </div>
-    <div class="staff-row">
-      <div class="staff-avatar" style="background:#EAF3DE;color:#27500A">MR</div>
-      <div class="staff-info">
-        <div class="staff-name">Marcus R. — age 1y 11m</div>
-        <div class="staff-issue">Transition planning — UPK eligibility screen needed</div>
-      </div>
-      <span class="badge badge-info">Action needed</span>
-    </div>
-    <div class="staff-row">
-      <div class="staff-avatar" style="background:#EAF3DE;color:#27500A">SW</div>
-      <div class="staff-info">
-        <div class="staff-name">Sofia W. — age 2y 8m</div>
-        <div class="staff-issue">Annual IFSP — all services current</div>
-      </div>
-      <span class="badge badge-ok">On track</span>
-    </div>
-    <div style="margin-top:10px">
-      <button class="item-action" onclick="extLink('Early Intervention system — full caseload')">View full caseload ↗</button>
-    </div>
-  </div>
-
-  <div class="section-label">My credentials &amp; certifications</div>
-  <div class="card">
-    <div class="item-row">
-      <div><div class="item-label">EI Specialist certification</div><div class="item-sub">Active — renewal Dec 2026</div></div>
-      <span class="badge badge-ok">Current</span>
-    </div>
-    <div class="item-row">
-      <div><div class="item-label">CPR / First Aid</div><div class="item-sub">Active — renewal Sept 2025</div></div>
-      <span class="badge badge-ok">Current</span>
-    </div>
-    <div style="margin-top:10px">
-      <button class="item-action" onclick="extLink('PDIS — credential record for Dr. Chen')">View full record in PDIS ↗</button>
-    </div>
-  </div>
-
-  <div class="section-label">Connected systems</div>
-  <button class="link-out" onclick="extLink('Early Intervention data system — IFSPs, service logs, referrals')">
-    <div><div class="link-out-label">Early Intervention system</div><div class="link-out-sub">IFSPs, service logs, referrals</div></div>
-    <span class="link-out-ext">External ↗</span>
-  </button>
-  <button class="link-out" onclick="extLink('UPK transition tool — eligibility screening')">
-    <div><div class="link-out-label">UPK transition tool</div><div class="link-out-sub">Screen children aging into preschool eligibility</div></div>
-    <span class="link-out-ext">External ↗</span>
-  </button>
-  <button class="link-out" onclick="extLink('PDIS training catalog')">
-    <div><div class="link-out-label">PDIS training catalog</div><div class="link-out-sub">Find professional development for your specialty</div></div>
-    <span class="link-out-ext">External ↗</span>
-  </button>
-
-  <div class="section-label">Coming in future phases</div>
-  <div class="coming-card">
-    <div class="coming-icon">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#888" stroke-width="1.3"/><path d="M8 5v3.5l2 2" stroke="#888" stroke-width="1.3" stroke-linecap="round"/></svg>
-    </div>
-    <div><div class="coming-title">Program coordination view</div><div class="coming-body">See which early childhood programs your caseload children attend and coordinate with their providers directly.</div></div>
-  </div>
-</div>
-
-</main>
 
 <script>
 const roles={
-  individual:{
-    name:'Tamara Willis',role:'Lead Teacher · Sunshine Learning Center',
-    initials:'TW',
-    note:'Individual contributor view: your credentials, ECPC career pathway, training, and opportunities — the "me" layer.'
-  },
-  director:{
-    name:'Maria Rodriguez',role:'Center Director · Sunshine Learning Center',
-    initials:'MR',
-    note:'Center Director view: enrollment queue, staff credential tracking, program profile, and billing — plus your own credentials.'
-  },
-  specialist:{
-    name:'Dr. Sarah Chen',role:'EI Specialist · Denver Metro Region',
-    initials:'SC',
-    note:'Specialist view: caseload management, IFSP tracking, transition coordination, and personal credentials. Links out to specialized systems.'
-  }
+  professional:{name:'Tamara Willis',role:'Professional',initials:'TW',note:'Professional view — your credentials, ECPC career pathway, training, and opportunities.'},
+  director:{name:'Maria Rodriguez',role:'Center Director',initials:'MR',note:'Center Director view — use the Dashboard, Quality/License/Staff, and Programs tabs to navigate your workspace.'},
+  specialist:{name:'Dr. Sarah Chen',role:'EI Specialist',initials:'SC',note:'Specialist view — caseload management, IFSP tracking, and personal credentials.'},
+  upk:{name:'Maria Rodriguez',role:'Center Director · UPK MVP',initials:'MR',note:'UPK MVP — Phase 1 preview. Enrollment, quality standards self-assessment, profile, and payments.'}
 };
 
 function switchRole(r){
-  document.querySelectorAll('.role-tab').forEach(t=>{
-    t.classList.remove('active');
-    t.setAttribute('aria-selected','false');
+  document.querySelectorAll('.role-card').forEach(c=>{c.classList.remove('active');c.setAttribute('aria-selected','false')});
+  document.getElementById('rc-'+r).classList.add('active');
+  document.getElementById('rc-'+r).setAttribute('aria-selected','true');
+  ['professional','director','specialist','upk'].forEach(v=>{
+    const el=document.getElementById('view-'+v);
+    if(el) el.classList.add('hidden');
   });
-  const activeTab=document.getElementById('tab-'+r);
-  activeTab.classList.add('active');
-  activeTab.setAttribute('aria-selected','true');
-  ['individual','director','specialist'].forEach(v=>{
-    document.getElementById('view-'+v).classList.add('hidden');
+  ['dir-dashboard','dir-quality','dir-programs'].forEach(s=>{
+    document.getElementById(s).classList.add('hidden');
   });
-  document.getElementById('view-'+r).classList.remove('hidden');
+  const itb=document.getElementById('inner-tabs-bar');
+  if(r==='director'){
+    itb.style.display='block';
+    switchDTab('dashboard');
+  } else {
+    itb.style.display='none';
+    document.getElementById('view-'+r).classList.remove('hidden');
+  }
   const d=roles[r];
-  document.getElementById('user-name-display').textContent=d.name;
-  document.getElementById('user-role-display').textContent=d.role;
-  document.getElementById('avatar-initials').textContent=d.initials;
+  document.getElementById('av').textContent=d.initials;
+  document.getElementById('uname').textContent=d.name;
+  document.getElementById('urole').textContent=d.role;
   document.getElementById('role-note').textContent=d.note;
 }
 
+function switchDTab(t){
+  document.querySelectorAll('.inner-tab').forEach(tb=>{tb.classList.remove('active');tb.setAttribute('aria-selected','false')});
+  document.getElementById('dt-'+t).classList.add('active');
+  document.getElementById('dt-'+t).setAttribute('aria-selected','true');
+  ['dashboard','quality','programs'].forEach(s=>{document.getElementById('dir-'+s).classList.add('hidden')});
+  document.getElementById('dir-'+t).classList.remove('hidden');
+}
+
+function toggleQS(id){
+  const el=document.getElementById(id);
+  const btn=el.querySelector('.qs-header');
+  const isOpen=el.classList.contains('open');
+  el.classList.toggle('open');
+  btn.setAttribute('aria-expanded',String(!isOpen));
+}
+
+function setQS(id,btn,status,label,badgeClass){
+  document.querySelectorAll('#'+id+' .qs-opt').forEach(o=>o.classList.remove('sel-not','sel-progress','sel-meeting'));
+  btn.classList.add('sel-'+status);
+  const badge=document.getElementById(id+'-badge');
+  badge.className='badge '+badgeClass;
+  badge.textContent=label;
+}
+
 function enrollAction(action,name){
-  const msgs={
-    accept:'Accepted — '+name+' will be enrolled. Confirmation sent to family and recorded in UPK.',
-    decline:'Declined — '+name+' removed from queue. Family has been notified.',
-    waitlist:'Waitlisted — '+name+' added to waitlist. Family notified of position.'
-  };
+  const msgs={accept:'✓ Accepted — '+name+' will be enrolled. Confirmation sent to family.',decline:'Declined — '+name+' removed from queue. Family notified.',waitlist:'Waitlisted — '+name+' added to waitlist. Family notified of position.'};
   alert(msgs[action]);
 }
 
-function extLink(dest){
-  alert('Prototype link → '+dest+'\n\nIn production, this would open the relevant system or page.');
-}
+function extLink(dest){alert('→ '+dest+'\n\nIn production this opens the relevant system or page.')}
 
-function openLang(){
-  const el=document.getElementById('lang-overlay');
-  el.classList.toggle('open');
+function toggleLang(){
+  const dd=document.getElementById('lang-dd');
+  const btn=document.getElementById('lang-btn');
+  const open=dd.classList.toggle('open');
+  btn.setAttribute('aria-expanded',String(open));
 }
-function closeLang(){
-  document.getElementById('lang-overlay').classList.remove('open');
+function setLang(code,name){
+  document.getElementById('lang-label').textContent=code;
+  document.getElementById('lang-btn').setAttribute('aria-label','Select language, currently '+name);
+  document.getElementById('lang-dd').classList.remove('open');
+  document.getElementById('lang-btn').setAttribute('aria-expanded','false');
 }
-function setLang(lang){
-  document.getElementById('lang-label').textContent=lang;
-  closeLang();
-}
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape') closeLang();
-});
 document.addEventListener('click',function(e){
-  const overlay=document.getElementById('lang-overlay');
-  const btn=document.querySelector('.lang-btn');
-  if(!overlay.contains(e.target)&&!btn.contains(e.target)) closeLang();
+  const dd=document.getElementById('lang-dd');
+  const btn=document.getElementById('lang-btn');
+  if(!dd.contains(e.target)&&!btn.contains(e.target)){dd.classList.remove('open');btn.setAttribute('aria-expanded','false')}
 });
-</script>
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){document.getElementById('lang-dd').classList.remove('open');document.getElementById('lang-btn').setAttribute('aria-expanded','false')}
+});
 
+switchRole('director');
+</script>
 </body>
 </html>
